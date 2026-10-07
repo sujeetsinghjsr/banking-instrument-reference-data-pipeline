@@ -1,0 +1,9 @@
+flowchart LR
+    A[Internal Banking Applications] -->|CSV| B[ADLS Gen2 - Landing]
+    B --> C[Azure Data Factory]
+    C --> D[Azure Databricks]
+    E[Azure SQL - Validation Metadata] --> D
+    K[Azure Key Vault] --> D
+    D -->|PASS| F[ADLS Gen2 - Staging]
+    D -->|FAIL| G[ADLS Gen2 - Rejected]
+    F --> H[Delta Lake - Instrument Reference]

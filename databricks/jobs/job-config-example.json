@@ -1,0 +1,29 @@
+{
+  "name": "banking-instrument-reference-validation",
+  "description": "Portfolio-safe example of a Databricks validation job.",
+  "parameters": {
+    "input_path": "abfss://landing@<storage-account>.dfs.core.windows.net/instruments/",
+    "target_table": "reference_data.instrument_reference"
+  },
+  "tasks": [
+    {
+      "task_key": "read_landing_file",
+      "notebook": "databricks/notebooks/01_read_landing_file.py"
+    },
+    {
+      "task_key": "validate_duplicates",
+      "depends_on": ["read_landing_file"],
+      "notebook": "databricks/notebooks/02_validate_duplicates.py"
+    },
+    {
+      "task_key": "validate_dates",
+      "depends_on": ["validate_duplicates"],
+      "notebook": "databricks/notebooks/03_validate_dates.py"
+    },
+    {
+      "task_key": "write_delta",
+      "depends_on": ["validate_dates"],
+      "notebook": "databricks/notebooks/05_write_delta_table.py"
+    }
+  ]
+}

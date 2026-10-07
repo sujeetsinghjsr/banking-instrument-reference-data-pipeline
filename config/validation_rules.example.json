@@ -1,0 +1,23 @@
+{
+  "duplicate_rule": {
+    "enabled": true,
+    "action_on_failure": "REJECT_FILE"
+  },
+  "date_rules": [
+    {
+      "column_name": "trade_date",
+      "expected_format": "yyyy-MM-dd",
+      "enabled": true
+    },
+    {
+      "column_name": "maturity_date",
+      "expected_format": "yyyy-MM-dd",
+      "enabled": true
+    },
+    {
+      "column_name": "settlement_date",
+      "expected_format": "yyyy-MM-dd",
+      "enabled": true
+    }
+  ]
+}
